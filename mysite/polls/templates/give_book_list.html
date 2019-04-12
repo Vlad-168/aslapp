@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1  style="color:white;" align = "center">Книги</h1>
+<form action="{% url 'books_search' %}" method="GET">
+    <input type="text" name="q" />
+    <button type="submit">Поиск по названию книги</button>
+</form>
+
+{% include "results_search.html" %}
+
+{% for place in object_list %}
+    <div style="margin: 20px;">
+    	<div class="alert alert-info" role="alert" style="width: 400px">
+    	    <div style="color:black; font-family: Georgia, Serif">
+    		Название: {{ place.name }} <br/>    		
+            Автор: {{ place.author }}  <br/> 
+    		Класс: {{ place.clas }}  <br/>
+    		Номер издания: {{ place.num_izd }}  <br/>
+    		Название издания: {{ place.name_izd }} <br/>
+            Количество книг: {{ place.quantity }} <br/>
+            <a href=".">Выдать эту книгу</a>
+            </div>
+    	</div>
+    </div>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+
+{% endblock %}
